@@ -1,4 +1,3 @@
-
 const browserName = process.env.BROWSER || 'msedge';
 
 const common = {
@@ -9,9 +8,10 @@ const common = {
   ],
   format: [
     'progress',
+    'summary',
     'json:reports/cucumber-report.json',
     'html:reports/cucumber-report.html',
-    //'allure-cucumberjs:reports/allure-results/'
+    'allure-cucumberjs/reporter'
   ],
   formatOptions: {
     snippetInterface: 'async-await'

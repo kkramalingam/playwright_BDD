@@ -3,7 +3,7 @@
  * It handles browser setup, screenshot capture, and test environment management
  */
 
-import { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } from '@cucumber/cucumber';
+import { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout, AfterStep } from '@cucumber/cucumber';
 import { chromium, firefox, webkit } from '@playwright/test';
 import fs from 'fs-extra';
 import { STEP_TIMEOUT, browserOptions, screenshotOptions, videoOptions, traceOptions } from '../config/config';
@@ -110,6 +110,13 @@ Before(async function (this: CustomWorld, scenario) {
   this.page = await this.context.newPage();
 });
 
+AfterStep(async function (step) {
+  if (step.result?.status === Status.FAILED || step.result?.status === Status.PASSED) {
+    const screenshot = await this.page.screenshot({ fullPage: true });
+    this.attach(screenshot, 'image/png');
+  }
+});
+
 /**
  * After hook - Runs after each scenario
  * Captures screenshots on failure, saves traces, and closes browser
@@ -122,22 +129,42 @@ Before(async function (this: CustomWorld, scenario) {
 After(async function (this: CustomWorld, scenario) {
   logger.info(`Finishing scenario: ${this.testName}`);
 
+  // Log scenario status to the terminal
+  if (scenario.result?.status === Status.PASSED) {
+    console.log(`Scenario "${this.testName}" PASSED`);
+  } else if (scenario.result?.status === Status.FAILED) {
+    console.log(`Scenario "${this.testName}" FAILED`);
+  } else {
+    console.log(`Scenario "${this.testName}" status: ${scenario.result?.status}`);
+  }
+
   // Take screenshot if scenario failed and screenshot on failure is enabled
-  if (scenario.result?.status === Status.FAILED || Status.PASSED) {
+  if (scenario.result?.status === Status.FAILED||scenario.result?.status === Status.PASSED) {
     if (this.page && screenshotOptions.takeOnFailure) {
       // Generate timestamp for unique filename
       const timeStamp = Date.now();
-      // Create screenshot path with scenario name and timestamp
-      const screenshotPath = `${screenshotOptions.path}${this.testName}${timeStamp}-failure.png`;
-      
+      const pid = process.pid;
+      // Create screenshot path with scenario name, pid and timestamp to avoid collisions in parallel runs
+      const screenshotPath = `${screenshotOptions.path}${this.testName}-${pid}-${timeStamp}-failure.png`;
+
       // Take screenshot and save to file
       await this.page.screenshot({ path: screenshotPath, fullPage: false });
-      
+
       // Read screenshot file and attach to test report
       const screenshot = fs.readFileSync(screenshotPath);
       this.attach(screenshot, 'image/png');
 
       logger.info(`Screenshot saved to: ${screenshotPath}`);
+    }
+
+    // Handle video attachment
+    if (this.context && videoOptions.enabled) {
+      const videoPath = await this.context.pages()[0].video()?.path();
+      if (videoPath) {
+        const video = fs.readFileSync(videoPath);
+        this.attach(video, 'video/webm'); // Allure will show it
+        logger.info(`Video saved to: ${videoPath}`);
+      }
     }
   }
 
@@ -145,16 +172,17 @@ After(async function (this: CustomWorld, scenario) {
   if (traceOptions.enabled && this.context) {
     // Generate timestamp for unique filename
     const timeStamp = Date.now();
-    // Create trace path with scenario name and timestamp
-    const tracePath = `${traceOptions.path}${this.testName}${timeStamp}.zip`;
-    
+    const pid = process.pid;
+    // Create trace path with scenario name, pid and timestamp to avoid collisions in parallel runs
+    const tracePath = `${traceOptions.path}${this.testName}-${pid}-${timeStamp}.zip`;
+
     // Stop tracing and save trace file
     await this.context.tracing.stop({ path: tracePath });
-    
+
     // Read trace file and attach to test report for Allure integration
     const trace = fs.readFileSync(tracePath);
     this.attach(trace, 'application/zip');
-    
+
     logger.info(`Trace saved to: ${tracePath}`);
   }
 
@@ -167,4 +195,10 @@ After(async function (this: CustomWorld, scenario) {
   const endTime = new Date();
   const duration = endTime.getTime() - this.startTime.getTime();
   logger.info(`Scenario completed in ${duration}ms`);
+});
+
+AfterAll(async function () {
+  // If you want to track scenario results, you need to implement your own counters.
+  // For now, just log that all scenarios are finished.
+  console.log('All scenarios have finished executing.');
 });
