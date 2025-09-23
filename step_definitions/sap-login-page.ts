@@ -5,6 +5,7 @@ import { expect } from 'chai';
 import dotenv from "dotenv"
 
 
+
 dotenv.config({path:"./data/login.env"});
 
 const username=process.env.SAP_USERNAME || "hari.radhakrishnan@qeagle.com";
@@ -25,6 +26,7 @@ When('the user enters a valid username and password', async function () {
     await wrapper.click(`//div[@class="fn-button__text"]`);
     await wrapper.fill(`//input[@id='j_password']`, password);
     await wrapper.click(`//div[text()='Continue']`);
+ 
 });
 
 

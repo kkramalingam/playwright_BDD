@@ -52,6 +52,33 @@ export class PlaywrightWrapper {
 
     }
 
+
+      /**
+    * Waits for a specific element to be attached to the DOM.
+    * 
+    * @param {string} locator - The locator for the element to wait for.
+    * @param {string} name - A descriptive name for the element (not used in this function but could be useful for logging).
+    */
+    async waitSelector(locator: string) {
+      
+            await this.page.waitForSelector(locator, { timeout: 30000, state: "attached" });
+       
+    }
+
+    async replaceUrl()
+    {
+       await this.page.waitForLoadState('networkidle');
+  
+  // Step 3: Get the current redirected URL
+  let url1 = this.page.url();
+  
+  // Step 4: Strip autoStartTour if it exists
+  url1 = url1.replace(/&?help-autoStartTour=[^&#]*/g, "");
+  
+  // Step 5: Navigate to cleaned URL
+  await this.page.goto(url1);
+  }
+
     async pressEnter()
     {
       await this.page.keyboard.press("Enter")

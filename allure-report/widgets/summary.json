@@ -1,1 +1,1 @@
-{"reportName":"Allure Report for SAP Automation","testRuns":[],"statistic":{"failed":0,"broken":3,"skipped":0,"passed":1,"unknown":0,"total":4},"time":{"start":1758279732340,"stop":1758279933480,"duration":201140,"minDuration":85199,"maxDuration":115911,"sumDuration":374492}}
+{"reportName":"Allure Report","testRuns":[],"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"time":{"start":1758614179968,"stop":1758614268944,"duration":88976,"minDuration":88976,"maxDuration":88976,"sumDuration":88976}}

@@ -108,6 +108,24 @@ Before(async function (this: CustomWorld, scenario) {
 
   // Create a new page in the browser context
   this.page = await this.context.newPage();
+
+  // Inject BEFORE any navigation
+  await this.page.addInitScript(() => {
+    const observer = new MutationObserver(() => {
+      const dialog = document.querySelector("div[role='dialog']");
+      if (dialog) {
+        const heading = dialog.querySelector("h2");
+        if (heading && heading.textContent?.includes("Introduction")) {
+          const btn = dialog.querySelector("button[aria-label='Leave Tour']");
+          (btn as HTMLButtonElement)?.click();
+          console.log("SAP intro popup auto-closed ✅");
+        }
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+
+  // ...any navigation or test actions...
 });
 
 AfterStep(async function (step) {
@@ -201,4 +219,12 @@ AfterAll(async function () {
   // If you want to track scenario results, you need to implement your own counters.
   // For now, just log that all scenarios are finished.
   console.log('All scenarios have finished executing.');
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Unhandled Exception:', err);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled Rejection:', reason);
 });

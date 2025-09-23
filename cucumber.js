@@ -18,6 +18,12 @@ const common = {
   }
 };
 
+const isDryRun = process.argv.includes('--dry-run');
+
+if (isDryRun) {
+  common.format = ['progress'];
+}
+
 module.exports = {
   chrome: {
     ...common,

@@ -1,15 +1,4 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
 "As an Accounts Receivable user
-  I want to close a dispute case in SAP
-  So that the case status is updated and reflected in the Closed section","87198","Close an existing dispute case","","Fri Sep 19 16:32:12 IST 2025","broken","Fri Sep 19 16:33:39 IST 2025","","","",""
-"As an Accounts Receivable user
-
-  I want to edit customer line items in SAP
-
-  So that the changes are saved and reflected in the system","86184","Edit an existing customer line item","","Fri Sep 19 16:33:39 IST 2025","broken","Fri Sep 19 16:35:05 IST 2025","","","",""
-"As an Accounts Payable user
-  I want to unblock a supplier in SAP
-  So that the supplier can receive payments again","85199","Unblock a supplier currently blocked for payment","","Fri Sep 19 16:34:08 IST 2025","broken","Fri Sep 19 16:35:33 IST 2025","","","",""
-"As an Accounts Receivable user
-  I want to create a new dispute case in SAP
-  So that disputes are logged with the correct details for resolution","115911","Create a new dispute case","","Fri Sep 19 16:32:12 IST 2025","passed","Fri Sep 19 16:34:08 IST 2025","","","",""
+  I want to create and verify a customer contact in SAP
+  So that the contact is recorded for the business partner","88976","Create and verify customer contact for a business partner","","Tue Sep 23 13:26:19 IST 2025","passed","Tue Sep 23 13:27:48 IST 2025","","","",""

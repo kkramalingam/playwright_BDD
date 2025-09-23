@@ -10,7 +10,7 @@ export const selector = {
   reasonInput: `//bdi[text()='Reason']/following::input[1]`,
   rootCauseInput: `//bdi[text()='Root Cause Code']/following::input[1]`,
   caseCreateButton: `//bdi[contains(@id,"DisputeCase--activate")]`,
-  
+  contactCreateButton:`//bdi[contains(@id,"CustomerContactAttribute--activate")]`,
 
   managePaymentBlocks:`//a[contains(@aria-label,"Manage Payment Blocks")]`,  // sapDisputeCasePage selectors
   manageDisputeCases: `//a[contains(@aria-label,"Manage Dispute Cases")]`,
@@ -159,7 +159,24 @@ selectHour:`//div[@aria-label="Hours"]`,
 selectMinutes:`//div[@aria-label="Minutes"]`,
 selectPm:` //div[text()="PM"]`,
 clickOk:`//bdi[text()="OK"]`,
-clickSave:`//bdi[text()="Save"]`
+clickSave:`//bdi[text()="Save"]`,
+
+//Customer Contact for Business Partner
+clickOnProcessReceivables:`//a[contains(@aria-label,'Process Receivables')]`,
+clickOnIcon:`//span[contains(@id,'BASIC-BusinessPartner-vhi')]`,
+enterOnSearch:`(//input[@aria-label='Search'])[1]`,
+clickOnGO:`(//bdi[text()='Go'])[1]`,
+clickOnbpChechbox:`//div[contains(@id,'rowsel0')]`,
+clickOnOk:`//span[contains(@id,'ok-content')]`,
+clickOnSegmentIcon:`(//span[contains(@id,'BASIC-CollectionSegment-arrow')])[1]`,
+enterSegement:`//span[text()='YT_SEGMT01 (Collection Segment YT_SEGMT01)']`,
+enterSegementCompanyCode:`//input[contains(@id,'CompanyCode-inner')]`,
+clickOnItem:`(//div[@class='sapMObjectIdentifier'])[1]`,
+clickOnCreateContact:`//bdi[contains(text(),'Customer Contact')]`,
+clickOnResultContact:`(//span[contains(@id,'CustomerContactResult::Field-comboBoxEdit-arrow')])[1]`,
+clickOnResult:`//span[text()='002 (Customer Not Reached)']`,
+enterContantPerson:`//input[contains(@id,'ContactPersonName')]`,
+clickOnCreateButton:`(//bdi[text()='Create'])[4]`,
 
 
 };
