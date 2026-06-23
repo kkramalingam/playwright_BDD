@@ -42,6 +42,11 @@ export const selector = {
   manageCustomerLineItems: `//a[contains(@aria-label,"Manage Customer Line Items")]`,
   customerValueHelp: `(//span[@aria-label="Show Value Help"])[1]`,
   customerRadio: '(//div[@class="sapUiTableCell sapUiTableContentCell sapUiTableRowSelectionCell"])[1]',
+  // Aliases used by manage-customer-line-items step definitions
+  customerLineItemsStatus: `//span[@class='sapMSltLabel']`,
+  customerLineStatus_open: `//li[text()='Open Items']`,
+  openKeyDatePicker: `//span[contains(@id,'BASIC-KeyDate-input-vhi')]`,
+  selectDayAstdy: `(//span[text()='Today'])[1]`,
   // okButton removed duplicate
   companyValueHelp: `(//span[@aria-label="Show Value Help"])[2]`,
   companyRadio: '(//div[@class="sapUiTableCell sapUiTableContentCell sapUiTableRowSelectionCell"])[1]',
