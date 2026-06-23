@@ -1,5 +1,4 @@
 name: Playwright Automation
-
 on:
   push:
     branches:
@@ -8,30 +7,23 @@ on:
     - cron: '0 3 * * *'
     - cron: '0 4 * * *'
   workflow_dispatch:
-
 jobs:
   playwright-test:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
       - name: Install Dependencies
         run: npm ci
-
       - name: Install Playwright Browsers
         run: npx playwright install chromium
-
       - name: Execute Cucumber Tests
         run: npm test
-
       - name: Upload Cucumber Reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -39,7 +31,6 @@ jobs:
           name: cucumber-reports
           path: reports/
           retention-days: 30
-
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
@@ -47,14 +38,13 @@ jobs:
           name: test-results
           path: test-results/
           retention-days: 30
-
       - name: Send Email Notification
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.office365.com
-          server_port: 587
-          secure: false
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          secure: true
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           from: ${{ secrets.EMAIL_FROM }}
@@ -67,5 +57,6 @@ jobs:
             Branch: ${{ github.ref_name }}
             Workflow: ${{ github.workflow }}
             Run Number: ${{ github.run_number }}
-            Run URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Run URL:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
             Reports and test results are available in GitHub artifacts.
