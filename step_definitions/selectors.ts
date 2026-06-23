@@ -1,5 +1,3 @@
-import { StringModule } from "@faker-js/faker";
-
 export const selector = {
   // sapDisputeCaseCreatePage selectors
   createButton: `//bdi[contains(@id,"DisputeCase--ActionCreateWithoutInvoice")]`,
