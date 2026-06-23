@@ -1,4 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"As an Accounts Receivable user
-  I want to create and verify a customer contact in SAP
-  So that the contact is recorded for the business partner","88976","Create and verify customer contact for a business partner","","Tue Sep 23 13:26:19 IST 2025","passed","Tue Sep 23 13:27:48 IST 2025","","","",""

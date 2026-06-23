@@ -8,9 +8,8 @@ const getWrapper=(world:any):PlaywrightWrapper=>new PlaywrightWrapper(world.page
          When('the user enters Supplier ID {string}', async function (supplierId:string) {
 
             const wrapper=getWrapper(this)     
-                        await wrapper.click(selector.supplierInput);
-                        await wrapper.click(selector.supplierFirstRow);
-                
+                await wrapper.click(selector.supplierInput);
+                await wrapper.click(selector.supplierFirstRow);
                 await wrapper.wait('minWait');
             
          });

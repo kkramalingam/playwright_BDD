@@ -3,6 +3,7 @@ import { CustomWorld } from '../hooks/custom-world';
 import { PlaywrightWrapper } from '../utils/wrapper';
 import { expect } from 'chai';
 import dotenv from "dotenv"
+import { selector } from './selectors';
 
 
 
@@ -35,4 +36,17 @@ When('the user click on the Finance Tab', async function () {
   await wrapper.click(`//div[contains(@id,'header')]/span[text()='Finance']`);
 });
 
+
+When('the user selects the Manage Customer Contacts option', async function () {
+          const wrapper=getWrapper(this);
+          await wrapper.click(selector.manageCustomerContactInSearch);
+        });
+
+   When('the user searches for Manage Customer Contacts in the search bar', async function () {
+             const wrapper=getWrapper(this);        
+             await wrapper.type(selector.serchInput,"Manage Customer Contacts")
+   });
+
+
+  
 

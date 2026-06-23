@@ -109,21 +109,6 @@ Before(async function (this: CustomWorld, scenario) {
   // Create a new page in the browser context
   this.page = await this.context.newPage();
 
-  // Inject BEFORE any navigation
-  await this.page.addInitScript(() => {
-    const observer = new MutationObserver(() => {
-      const dialog = document.querySelector("div[role='dialog']");
-      if (dialog) {
-        const heading = dialog.querySelector("h2");
-        if (heading && heading.textContent?.includes("Introduction")) {
-          const btn = dialog.querySelector("button[aria-label='Leave Tour']");
-          (btn as HTMLButtonElement)?.click();
-          console.log("SAP intro popup auto-closed ✅");
-        }
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
 
   // ...any navigation or test actions...
 });

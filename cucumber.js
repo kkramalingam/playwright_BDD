@@ -24,6 +24,7 @@ if (isDryRun) {
   common.format = ['progress'];
 }
 
+
 module.exports = {
   chrome: {
     ...common,

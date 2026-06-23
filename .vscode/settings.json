@@ -1,0 +1,22 @@
+{
+  "cucumberautocomplete.steps": [
+    "${workspaceFolder}/step_definitions/**/*.ts",
+    "${workspaceFolder}/step_definitions/**/*.js",
+    "${workspaceFolder}/**/step_definitions/**/*.ts",
+    "${workspaceFolder}/**/step_definitions/**/*.js"
+  ],
+  "cucumberautocomplete.additionalStepFiles": [
+    "${workspaceFolder}/step_definitions/steps-loader.js",
+    "${workspaceFolder}/.vscode/cucumber-steps/editor-steps.js"
+  ],
+  "cucumberautocomplete.syncfeatures": "${workspaceFolder}/features/**/*.feature",
+  "cucumberautocomplete.strictGherkinCompletion": true,
+  "cucumberautocomplete.smartSnippets": true,
+  "cucumberautocomplete.stepsInWord": true,
+  "cucumberautocomplete.customParameters": [
+    "--require-module",
+    "ts-node/register"
+  ],
+  "typescript.tsdk": "${workspaceFolder}/node_modules/typescript/lib",
+  "workbench.editor.enablePreview": false
+}

@@ -15,6 +15,11 @@ export class PlaywrightWrapper {
   constructor(page: Page, context: BrowserContext) {
     this.page = page;
     this.context = context;
+    this.page.addLocatorHandler(this.page.locator(`//span[text()='Welcome to SAP S/4HANA Cloud Public Edition!']`),async()=>{
+            console.log("popup appeared");
+            await this.page.locator(`//button[@title="Leave Tour"]`).click();
+            console.log("Handled the popup successfully")
+          });
   }
 
 
@@ -64,6 +69,18 @@ export class PlaywrightWrapper {
             await this.page.waitForSelector(locator, { timeout: 30000, state: "attached" });
        
     }
+
+     /**
+     * Type using the keyboard and press on the enter .
+     * @param {string} data - The data need to enter .
+     */
+    async keyTypeAndEnter(data: string) {
+              
+            await this.page.keyboard.type(data,{delay:300})
+            await this.page.keyboard.press("Enter")
+        
+    }
+
 
     async replaceUrl()
     {

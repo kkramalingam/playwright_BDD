@@ -1,28 +1,23 @@
+import { StringModule } from "@faker-js/faker";
 
 export const selector = {
   // sapDisputeCaseCreatePage selectors
   createButton: `//bdi[contains(@id,"DisputeCase--ActionCreateWithoutInvoice")]`,
   customerIdInput: `(//div[@class='sapMInputBaseContentWrapper']/input)[1]`,
-  createConfirmButton:`//button[.//bdi[contains(@id,'btnCreateWithoutInvoiceConfirmDialog')]]`,
+  createConfirmButton:`//bdi[contains(@id,'btnCreateWithoutInvoiceConfirmDialog')]`,
   caseTitleInput: `(//bdi[text()='Case Title']/following::input)[1]`,
   categoryInput: `//bdi[text()='Category']/following::input[1]`,
   priorityInput: `(//bdi[text()='Priority']/following::input[1])[2]`,
   reasonInput: `//bdi[text()='Reason']/following::input[1]`,
   rootCauseInput: `//bdi[text()='Root Cause Code']/following::input[1]`,
   caseCreateButton: `//bdi[contains(@id,"DisputeCase--activate")]`,
-  contactCreateButton:`//bdi[contains(@id,"CustomerContactAttribute--activate")]`,
+  
 
   managePaymentBlocks:`//a[contains(@aria-label,"Manage Payment Blocks")]`,  // sapDisputeCasePage selectors
   manageDisputeCases: `//a[contains(@aria-label,"Manage Dispute Cases")]`,
   
   customerKeyInput:
     `//label[@title="Key of Customer in Accounts Receivable Accounting"]/following-sibling::div//input`,
-  customerLineItemsStatus:`//label[@title="Status"]/following-sibling::div[contains(@data-sap-ui,'CustomSelectClearingStatus')]`,
-  customerLineStatus_open: `//li[text()='Open Items']`,
-
-  openKeyDatePicker:`//label[@title="Open on Key Date"]/following-sibling::div//span`,
-  selectDayAstdy:`//span[text()='Today']`,
-  
   companyCodeInput:
     `//label[@title="Company Code"]/following-sibling::div//input`,
   // goButton removed duplicate
@@ -106,7 +101,7 @@ export const selector = {
   ClickSupplierStatus:`//span[contains(@aria-labelledby,"BASIC-Status-arrow-label")]`,
   SelectBlockedStatus:`//span[text()='Account Blocked']`,
   GoButtoninPaymentBlocks:`//button[contains(@id,"btnGo")]`,
-  BlockedSupplier:(loc:string)=>`(//tbody//tr[.//td[contains(.,"${loc} ")]])[1]`,
+  BlockedSupplier:(supplierId:string)=>`(//tbody//tr[.//td[contains(.,"${supplierId} ")]])[1]`,
   UnblockSupplierButton:`//button[.//bdi[text()='Unblock Supplier']]`,
   ToastMsg:`//div[contains(@class,"sapMMessageToast ")]`,
   ReopenCaseButton:`//button[.//bdi[text()='Reopen Dispute Case']]`,
@@ -145,13 +140,14 @@ status:`(//span[contains(@id,'Status-text')])[4]`,
 
 
 searchButton:`//a[@aria-label="Open Search"]`,
+serchInput:`//input[@id="searchFieldInShell-input-inner"]`,
 manageCustomerContactInSearch:`//b[text()='Manage Customer Contacts']`,
 businessPartnerInput:`//label[@title="Business Partner Number"]/following-sibling::div//input`,
 collectionSegmentInput:`//label[@title="Collection Segment"]/following-sibling::div//input`,
 finishedCustomerContact:`//div[contains(text(),"Finished Customer Contacts")]`,
 firstContactRow:`//table[contains(@id,"CustomerContactAttribute--responsiveTable")]/tbody/tr[1]`,
 editInContactPage:`//button[contains(@id,"CustomerContactAttribute--edit")]`,
-contactTypeInput:` //span[contains(@aria-labelledby,"CustomerContactType")]`,
+contactTypeInput:` //input[contains(@aria-labelledby,"CustomerContactType") and contains(@id,'ObjectPage.view.Details')]`,
 visitContactType:`//span[contains(text(),"Visit")]`,
 opendatepicker:`//span[@aria-label="Open Picker"]`,
 selectDate:`//div[@data-sap-day="20250914"]`,

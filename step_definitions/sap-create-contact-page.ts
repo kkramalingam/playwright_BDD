@@ -54,17 +54,20 @@ When('the user selects Result of Contact {string}', async function (resultOfCont
      
     
 });
+
  When('the user enters Contact Person Name {string}', async function (name) {
       const wrapper =getWrapper(this);      
-    await wrapper.fillAndEnter(selector.enterContantPerson,name)
+      await wrapper.fillAndEnter(selector.enterContantPerson,name)
          });
 
  When('the user clicks on Create button in Contact Page',async function() {
     const wrapper =getWrapper(this);
-   // await wrapper.click();
-    await wrapper.click(selector.contactCreateButton)
-
+    await wrapper.click(selector.clickOnCreateContact)
  })
+
+  
+
+
 
 /**
  * 

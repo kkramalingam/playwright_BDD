@@ -16,8 +16,11 @@
       ]
     },
     "types": [
-      "node", 
-      "playwright",
+      "node"
+    ],
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
     ]
   },
   "include": [
