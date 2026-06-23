@@ -25,15 +25,6 @@ jobs:
         with:
           node-version: 24
 
-      - name: Verify required secrets
-        run: |
-          missing=0
-          if [ -z "${{ secrets.SMTP_USERNAME }}" ]; then echo "::error::Missing secret: SMTP_USERNAME"; missing=1; fi
-          if [ -z "${{ secrets.SMTP_PASSWORD }}" ]; then echo "::error::Missing secret: SMTP_PASSWORD"; missing=1; fi
-          if [ -z "${{ secrets.EMAIL_FROM }}" ]; then echo "::error::Missing secret: EMAIL_FROM"; missing=1; fi
-          if [ -z "${{ secrets.EMAIL_TO }}" ]; then echo "::error::Missing secret: EMAIL_TO"; missing=1; fi
-          if [ $missing -eq 1 ]; then echo "::error::One or more required secrets are missing. Aborting."; exit 1; fi
-
       - name: Install Dependencies
         run: npm ci
 
@@ -63,8 +54,8 @@ jobs:
         if: always()
         uses: dawidd6/action-send-mail@v4
         with:
-          server_address: smtp.office365.com
-          server_port: 587
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           secure: true
